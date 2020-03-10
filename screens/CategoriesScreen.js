@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet} from 'react-native';
+import { View, Text, Button, FlatList, StyleSheet} from 'react-native';
+
+import { CATEGORIES } from '../data/dummy-data';
 
 const CategoriesScreen = props => {
+    const renderGridItem = (itemData) => {
+    return <View style={styles.gridItem}><Text>{itemData.item.title}</Text></View>
+    }
+
     return (
-        <View style={styles.screen} >
-            <Text>The Categories Screen</Text>
-            <Button title="Next screen" onPress={() => {
-                props.navigation.navigate({routeName: 'CategoryMeal'});
-                // props.navigation.replace('CategoryMeal'); // Replaces the view in the stack, doesn't allow to navigate back
-            }}/>
-        </View>
+        <FlatList keyExtractor={(item) => item.id} data={CATEGORIES} renderItem={renderGridItem} numColumns={2} />
     );
 }
 
@@ -18,6 +18,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    gridItem: {
+        flex: 1,
+        margin: 15,
+        height: 150
     }
 });
 
