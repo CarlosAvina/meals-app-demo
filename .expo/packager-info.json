@@ -2,8 +2,8 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 4182,
-  "expoServerNgrokUrl": "https://bb-47r.anonymous.meals-app-demo.exp.direct",
-  "packagerNgrokUrl": "https://packager.bb-47r.anonymous.meals-app-demo.exp.direct",
-  "ngrokPid": 4211
+  "packagerPid": 2813,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
