@@ -12,7 +12,7 @@ const CategoryMealScreen = props => {
     <View style={styles.screen}>
       <Text>The Category Meal Screen</Text>
       <Text>{category.title}</Text>
-      <Button
+      <Button 
         title="Next Screen"
         onPress={() => {
           props.navigation.navigate({ routeName: "MealDetail" });
@@ -34,11 +34,7 @@ CategoryMealScreen.navigationOptions = navigationData => {
   const category = CATEGORIES.find(cat => cat.id === catId);
 
   return {
-    headerTitle: category.title,
-    headerStyle: {
-      backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
-    },
-    headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor
+    headerTitle: category.title
   };
 };
 
