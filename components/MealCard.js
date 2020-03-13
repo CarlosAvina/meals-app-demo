@@ -10,7 +10,7 @@ import {
 const MealCard = props => {
   return (
     <View style={styles.card}>
-      <TouchableOpacity onPress={() => console.log(`${props.title} pressed`)}>
+      <TouchableOpacity onPress={props.onSelected}>
         <View>
           <View style={{ ...styles.row, ...styles.header }}>
             <ImageBackground
