@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, FlatList, StyleSheet, Platform } from "react-native";
 
+import MealCard from '../components/MealCard';
 import { CATEGORIES, MEALS } from "../data/dummy-data";
 import Colors from '../constants/Colors';
 
@@ -10,7 +11,10 @@ const CategoryMealScreen = props => {
   const meals = MEALS.filter(meal => meal.categoryIds.indexOf(catId) >= 0);
 
   const renderMeal = (itemData) => {
-    return <View><Text>{itemData.item.title}</Text></View>;
+    const { title, imageUrl, duration, complexity, affordability } = itemData.item;
+    console.log(imageUrl);
+
+    return <MealCard title={title} image={imageUrl} duration={duration} complexity={complexity} affordability={affordability} />
   }
 
   return (
@@ -33,7 +37,9 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    paddingTop: 10,
+    paddingHorizontal: 20
   }
 });
 
