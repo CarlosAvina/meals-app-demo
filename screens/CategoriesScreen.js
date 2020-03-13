@@ -9,28 +9,22 @@ import {
   Platform
 } from "react-native";
 
+import GridItemTile from '../components/GridItemTile';
 import { CATEGORIES } from "../data/dummy-data";
 import Colors from "../constants/Colors";
 
 const CategoriesScreen = props => {
   const renderGridItem = itemData => {
-    return (
-      <TouchableOpacity
-        style={styles.gridItem}
-        onPress={() => {
-          props.navigation.navigate({
-            routeName: "CategoryMeal",
-            params: {
-              categoryId: itemData.item.id
-            }
-          });
-        }}
-      >
-        <View>
-          <Text>{itemData.item.title}</Text>
-        </View>
-      </TouchableOpacity>
-    );
+    const { id, title, color } = itemData.item;
+
+    return <GridItemTile color={color} title={title} onSelect={() => {
+        props.navigation.navigate({
+          routeName: "CategoryMeal",
+          params: {
+            categoryId: id
+          }
+        });
+    }} />
   };
 
   return (
@@ -52,11 +46,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
-  },
-  gridItem: {
-    flex: 1,
-    margin: 15,
-    height: 150
   }
 });
 

@@ -18,8 +18,8 @@ const loadFonts = () => {
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  if (fontsLoaded) {
-    return <AppLoading startAsync={loadFonts} onFinish={() => setFontsLoaded(true)}/>
+  if (!fontsLoaded) {
+    return <AppLoading startAsync={loadFonts} onFinish={() => setFontsLoaded(true)} onError={(err) => console.error(err)}/>
   }
   
   return <MealsNavigator />
