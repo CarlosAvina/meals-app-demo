@@ -47,6 +47,7 @@ const CategoryMealScreen = props => {
         data={meals}
         keyExtractor={(item, index) => item.id}
         renderItem={renderMeal}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: 10,
+    paddingTop: 0,
     paddingHorizontal: 20
   }
 });

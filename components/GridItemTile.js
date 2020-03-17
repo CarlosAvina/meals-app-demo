@@ -19,7 +19,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
     borderRadius: 10,
-    padding: 10
+    padding: 10,
+    shadowColor: 'black',
+    shadowOffset: {height: 10, width: 0},
+    shadowOpacity: 0.16,
+    shadowRadius: 10,
+    elevation: 5
   },
   itemText: {
     fontFamily: 'open-sans-bold',
