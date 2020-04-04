@@ -82,13 +82,33 @@ const BottomTabNavigator =
         },
       });
 
-const FiltersNavigator = createStackNavigator({
-  Filters: FiltersScreen,
-});
+const FiltersNavigator = createStackNavigator(
+  {
+    Filters: FiltersScreen,
+  },
+  {
+    defaultNavigationOptions: defaultNavOptionsConfig,
+  }
+);
 
-const MainNavigator = createDrawerNavigator({
-  Main: BottomTabNavigator,
-  Filters: FiltersNavigator,
-});
+const MainNavigator = createDrawerNavigator(
+  {
+    Main: {
+      screen: BottomTabNavigator,
+      navigationOptions: {
+        drawerLabel: "Meals",
+      },
+    },
+    Filters: FiltersNavigator,
+  },
+  {
+    contentOptions: {
+      activeTintColor: Colors.accentColor,
+      labelStyle: {
+        fontFamily: 'open-sans-bold'
+      },
+    },
+  }
+);
 
 export default createAppContainer(MainNavigator);
