@@ -6,30 +6,37 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
-  Platform
+  Platform,
 } from "react-native";
-
-import GridItemTile from '../components/GridItemTile';
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import HeaderButton from "../components/HeaderIcon";
+import GridItemTile from "../components/GridItemTile";
 import { CATEGORIES } from "../data/dummy-data";
 import Colors from "../constants/Colors";
 
-const CategoriesScreen = props => {
-  const renderGridItem = itemData => {
+const CategoriesScreen = (props) => {
+  const renderGridItem = (itemData) => {
     const { id, title, color } = itemData.item;
 
-    return <GridItemTile color={color} title={title} onSelect={() => {
-        props.navigation.navigate({
-          routeName: "CategoryMeal",
-          params: {
-            categoryId: id
-          }
-        });
-    }} />
+    return (
+      <GridItemTile
+        color={color}
+        title={title}
+        onSelect={() => {
+          props.navigation.navigate({
+            routeName: "CategoryMeal",
+            params: {
+              categoryId: id,
+            },
+          });
+        }}
+      />
+    );
   };
 
   return (
     <FlatList
-      keyExtractor={item => item.id}
+      keyExtractor={(item) => item.id}
       data={CATEGORIES}
       renderItem={renderGridItem}
       numColumns={2}
@@ -37,16 +44,25 @@ const CategoriesScreen = props => {
   );
 };
 
-CategoriesScreen.navigationOptions = {
-  headerTitle: "Meal Categories"
+CategoriesScreen.navigationOptions = (navigationData) => {
+  return {
+    headerTitle: "Meal Categories",
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item title="drawer" iconName="ios-menu" onPress={() => {
+          navigationData.navigation.toggleDrawer();
+        }} />
+      </HeaderButtons>
+    ),
+  };
 };
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
 
 export default CategoriesScreen;

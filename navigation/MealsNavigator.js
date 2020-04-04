@@ -3,6 +3,7 @@ import { Platform } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
+import { createDrawerNavigator } from "react-navigation-drawer";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -11,13 +12,14 @@ import CategoriesScreen from "../screens/CategoriesScreen";
 import CategoryMealScreen from "../screens/CategoryMealScreen";
 import MealDetailScreen from "../screens/MealDetailScreen";
 import FavoritesScreen from "../screens/FavoritesScreen";
+import FiltersScreen from "../screens/FiltersScreen";
 
 const defaultNavOptionsConfig = {
   headerStyle: {
     backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
   },
   headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
-  headerTitle: 'A screen'
+  headerTitle: "A screen",
 };
 
 const MealsNavigator = createStackNavigator(
@@ -80,4 +82,13 @@ const BottomTabNavigator =
         },
       });
 
-export default createAppContainer(BottomTabNavigator);
+const FiltersNavigator = createStackNavigator({
+  Filters: FiltersScreen,
+});
+
+const MainNavigator = createDrawerNavigator({
+  Main: BottomTabNavigator,
+  Filters: FiltersNavigator,
+});
+
+export default createAppContainer(MainNavigator);
