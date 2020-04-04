@@ -12,6 +12,14 @@ import CategoryMealScreen from "../screens/CategoryMealScreen";
 import MealDetailScreen from "../screens/MealDetailScreen";
 import FavoritesScreen from "../screens/FavoritesScreen";
 
+const defaultNavOptionsConfig = {
+  headerStyle: {
+    backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
+  },
+  headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
+  headerTitle: 'A screen'
+};
+
 const MealsNavigator = createStackNavigator(
   {
     Categories: CategoriesScreen,
@@ -20,13 +28,17 @@ const MealsNavigator = createStackNavigator(
   },
   {
     // initialRouteName: "CategoryMeal",
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
-      },
-      headerTintColor:
-        Platform.OS === "android" ? "white" : Colors.primaryColor,
-    },
+    defaultNavigationOptions: defaultNavOptionsConfig,
+  }
+);
+
+const FavsNavigator = createStackNavigator(
+  {
+    Favorites: FavoritesScreen,
+    MealDetail: MealDetailScreen,
+  },
+  {
+    defaultNavigationOptions: defaultNavOptionsConfig,
   }
 );
 
@@ -39,16 +51,16 @@ const tabsConfig = {
           <Ionicons name="ios-restaurant" size={22} color={tabInfo.tintColor} />
         );
       },
-      tabBarColor: Colors.primaryColor
+      tabBarColor: Colors.primaryColor,
     },
   },
   Favorites: {
-    screen: FavoritesScreen,
+    screen: FavsNavigator,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
         return <Ionicons name="ios-star" size={22} color={tabInfo.tintColor} />;
       },
-      tabBarColor: Colors.accentColor
+      tabBarColor: Colors.accentColor,
     },
   },
 };
@@ -59,8 +71,8 @@ const BottomTabNavigator =
         activeTintColor: Colors.accentColor,
         shifting: true,
         barStyle: {
-          backgroundColor: Colors.primaryColor // Only if shifting is set to false
-        }
+          backgroundColor: Colors.primaryColor, // Only if shifting is set to false
+        },
       })
     : createBottomTabNavigator(tabsConfig, {
         tabBarOptions: {
