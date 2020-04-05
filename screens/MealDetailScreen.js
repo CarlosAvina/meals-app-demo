@@ -1,43 +1,99 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet} from 'react-native';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import React from "react";
+import {
+  View,
+  Text,
+  Button,
+  Image,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
-import { MEALS } from '../data/dummy-data';
-import HeaderIcon from '../components/HeaderIcon';
+import { MEALS } from "../data/dummy-data";
+import HeaderIcon from "../components/HeaderIcon";
+import DefaultText from "../components/DefaultText";
 
-const MealDetailScreen = props => {
+const ListItem = (props) => {
+  return (
+    <View style={styles.listItem}>
+      <DefaultText>{props.children}</DefaultText>
+    </View>
+  );
+};
 
-    const mealId = props.navigation.getParam('mealId');
-    const meal = MEALS.find(meal => meal.id === mealId);
+const MealDetailScreen = (props) => {
+  const mealId = props.navigation.getParam("mealId");
+  const meal = MEALS.find((meal) => meal.id === mealId);
 
-    return (
-        <View style={styles.screen} >
-            <Text>{meal.title}</Text>
-            <Button title="Go home" onPress={() => {
-                props.navigation.popToTop();
-            }}/>
-        </View>
-    );
-}
+  return (
+    <ScrollView>
+      <Image
+        style={styles.image}
+        source={{ uri: meal.imageUrl }}
+        resizeMode="cover"
+      />
+      <View style={{ ...styles.row, ...styles.details }}>
+        <DefaultText>{meal.duration}m</DefaultText>
+        <DefaultText>{meal.complexity.toUpperCase()}</DefaultText>
+        <DefaultText>{meal.affordability.toUpperCase()}</DefaultText>
+      </View>
+      <Text style={styles.title}>Ingredients</Text>
+      {meal.ingredients.map((ingredient) => (
+        <ListItem key={ingredient}>{ingredient}</ListItem>
+      ))}
+      <Text style={styles.title}>Steps</Text>
+      {meal.steps.map((steps) => (
+        <ListItem key={steps}>{steps}</ListItem>
+      ))}
+    </ScrollView>
+  );
+};
 
 MealDetailScreen.navigationOptions = (navigationData) => {
-    const mealId = navigationData.navigation.getParam('mealId');
-    const meal = MEALS.find(meal => meal.id === mealId);
+  const mealId = navigationData.navigation.getParam("mealId");
+  const meal = MEALS.find((meal) => meal.id === mealId);
 
-    return {
-        headerTitle: meal.title,
-        headerRight: () => <HeaderButtons HeaderButtonComponent={HeaderIcon}>
-            <Item iconName={"ios-star"} title="fav" onPress={() => console.log("Icon pressed")} />
-        </HeaderButtons>
-    };
-}
+  return {
+    headerTitle: meal.title,
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderIcon}>
+        <Item
+          iconName={"ios-star"}
+          title="fav"
+          onPress={() => console.log("Icon pressed")}
+        />
+      </HeaderButtons>
+    ),
+  };
+};
 
 const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
+  image: {
+    width: "100%",
+    height: 200,
+  },
+  row: {
+    flexDirection: "row",
+  },
+  details: {
+    marginHorizontal: 20,
+    padding: 10,
+    justifyContent: "space-between",
+    alignItems: "center",
+    height: "10%",
+  },
+  title: {
+    marginHorizontal: 20,
+    fontFamily: "open-sans-bold",
+    fontSize: 22,
+    textAlign: "center",
+  },
+  listItem: {
+    marginVertical: 3,
+    marginHorizontal: 20,
+    borderColor: "#ccc",
+    borderWidth: 1,
+  },
 });
 
 export default MealDetailScreen;
