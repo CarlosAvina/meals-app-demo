@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, Text } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
@@ -20,6 +20,12 @@ const defaultNavOptionsConfig = {
   },
   headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
   headerTitle: "A screen",
+  headerTitleStyle: {
+    fontFamily: 'open-sans'
+  },
+  headerBackTitleStyle: {
+    fontFamily: 'open-sans'
+  }
 };
 
 const MealsNavigator = createStackNavigator(
@@ -54,6 +60,7 @@ const tabsConfig = {
         );
       },
       tabBarColor: Colors.primaryColor,
+      tabBarLabel: <Text>Meals!!</Text>
     },
   },
   Favorites: {
