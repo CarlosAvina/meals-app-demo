@@ -6,7 +6,7 @@ import HeaderButton from "../components/HeaderIcon";
 
 const FavoritesScreen = (props) => {
   const favMeals = useSelector(state => state.meals.favoriteMeals);
-  return <MealsList listData={meals} navigation={props.navigation} />;
+  return <MealsList listData={favMeals} navigation={props.navigation} />;
 };
 
 FavoritesScreen.navigationOptions = (navigationData) => {
