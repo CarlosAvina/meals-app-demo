@@ -19,6 +19,7 @@ const MealsList = (props) => {
         routeName: "MealDetail",
         params: {
           mealId: id,
+          mealTitle: title
         },
       });
     };

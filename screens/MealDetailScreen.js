@@ -51,11 +51,11 @@ const MealDetailScreen = (props) => {
 };
 
 MealDetailScreen.navigationOptions = (navigationData) => {
-  const mealId = navigationData.navigation.getParam("mealId");
-  const meal = MEALS.find((meal) => meal.id === mealId);
 
+  const mealTitle = navigationData.navigation.getParam('mealTitle');
+  
   return {
-    headerTitle: meal.title,
+    headerTitle: mealTitle,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderIcon}>
         <Item
