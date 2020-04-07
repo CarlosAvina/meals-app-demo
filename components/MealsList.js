@@ -17,7 +17,7 @@ const MealsList = (props) => {
       affordability,
     } = itemData.item;
 
-    const isFavorite = favoriteMeals.some(meal => meal.id = id);
+    const isFavorite = favoriteMeals.some(meal => meal.id === id);
 
     const navigateMealDetail = () => {
       props.navigation.navigate({
